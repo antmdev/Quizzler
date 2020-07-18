@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        //        progressBar.setProgress(, animated: true) //set progress back to zero
+        
     }
     
     
@@ -59,7 +59,7 @@ class ViewController: UIViewController {
     //need objc in front of func if use long form timer
     func updateUI(){
         questionLabel.text = quizBrain.getQuestionText()
-        progressBar.progress = quizBrain.getProgressI()
+        progressBar.progress = quizBrain.getProgress()
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
         
