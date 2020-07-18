@@ -24,52 +24,45 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-//        progressBar.setProgress(, animated: true) //set progress back to zero
+        //        progressBar.setProgress(, animated: true) //set progress back to zero
     }
-
- 
+    
+    
     @IBAction func answerButtonPressed(_ sender: UIButton) {
-       
-        let userAnswer = sender.currentTitle //True / False
         
-        quizBrain.checkAnswer(userAnswer)
-                
+        let userAnswer = sender.currentTitle! //True / False
         
-        if userAnswer == actualAnswer {
+        let userGotItRight = quizBrain.checkAnswer(userAnswer)
+        
+        if userGotItRight { //doesnt require == boolean as it knows it type BOOL
             print("Right!")
             sender.backgroundColor = UIColor.green
-            
-        } else {
+        } else if userGotItRight {
             print("Wrong!")
             sender.backgroundColor = UIColor.red
         }
         
-        if questionNumber + 1 < quiz.count {
-            questionNumber += 1
-            
-        } else {
-            
-            print("No more Questions!")
-            questionNumber = 0
-        }
+        quizBrain.nextQuestion()
         
-//Shortcode Timer
+        
+        //Shortcode Timer
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
             self.updateUI()
             
-            }
- 
-//Shortcode Timer
-//        Timer.scheduledTimer(timeInterval: 0.2, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-    
+        }
+        
+        //Shortcode Timer
+        //        Timer.scheduledTimer(timeInterval: 0.2, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
+        
     }
     
     //need objc in front of func if use long form timer
     func updateUI(){
-        questionLabel.text = quiz[questionNumber].text
+        questionLabel.text = quizBrain.getQuestionText()
+        progressBar.progress = quizBrain.getProgressI()
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
-        progressBar.setProgress(Float(questionNumber + 1) / Float(quiz.count) , animated: true)
+        
         
     }
     

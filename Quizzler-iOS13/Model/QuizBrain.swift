@@ -12,7 +12,7 @@ struct QuizBrain {
     
     //quiz is now a property of the QuizBrain structue
     //we dont need to intialisae it because its already got all the values it needa and we're not going to be adding to it or removing from it 
-     
+    
     let quiz = [
         Question(q: "A slug's blood is green.", a: "True"),
         Question(q: "Approximately one quarter of human bones are in the feet.", a: "True"),
@@ -31,25 +31,57 @@ struct QuizBrain {
     var questionNumber = 0
     
     
-//func checkAnswer (answer userAnswer: String)
-/* in this case when we call the function we can give it an "external username" which is "answer"
- so when you call it it looks like this:
- 
- func quizBrain.checkAnswer(answer: userAnswer) instead of
- 
- quizBrain.checkAnswer(userAnswer: userAnswer)
- 
- but, if we make the external username not required by adding an underscore
- 
-  func quizBrain.checkAnswer(_ userAnswer: userAnswer)
-  
- then we can call it like this
- 
- quizBrain.checkAnswer(userAnswer)     */
+    //func checkAnswer (answer userAnswer: String)
+    //internal username = userAnswer
+    /* in this case when we call the function we can give it an "external username" which is "answer"
+     so when you call it it looks like this:
+     
+     func quizBrain.checkAnswer(answer: userAnswer) instead of
+     
+     quizBrain.checkAnswer(userAnswer: userAnswer)
+     
+     but, if we make the external username not required by adding an underscore
+     
+     func quizBrain.checkAnswer(_ userAnswer: userAnswer)
+     
+     then we can call it like this
+     
+     quizBrain.checkAnswer(userAnswer)     */
     
-    func checkAnswer(_ userAnswer: String) {
-        print(userAnswer)
+    
+    func checkAnswer(_ userAnswer: String) -> Bool {
+        
+        if userAnswer == quiz[questionNumber].answer {
+            //user got it right
+            return true
+        }
+        else {
+            //user got it right
+            return false
+        }
     }
     
     
+    func getQuestionText() -> String {
+        return quiz[questionNumber].text
+        
+        
+    }
+    
+    func getProgressI() -> Float {
+        let progress = progressBar.setProgress(Float(questionNumber + 1) / Float(quiz.count) , animated: true)
+        
+    }
+    
+    func nextQuestion() {
+        if questionNumber + 1 < quiz.count {
+            questionNumber += 1
+            
+        } else {
+            
+            print("No more Questions!")
+            questionNumber = 0
+        }
+        
+    }
 }
