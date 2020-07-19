@@ -27,9 +27,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
         scoreLabel.text = "Score: \(quizBrain.getScore())"
-        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
-        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
-        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
+        
+//DONT NEED TO SET HERE AS UPDATE UI CALL IT ANYWAY
+//        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
+//        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
+//        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
         progressBar.setProgress( 0.0, animated: true)
     }
     
@@ -67,6 +69,15 @@ class ViewController: UIViewController {
 // MARK: Update UI
     
     func updateUI(){
+         
+        //update buttons to hold correct answer - ANGELA CODE
+        //ass all array choices returned you call the MCQ answer number you want here instead
+        let answerChoices = quizBrain.getAnswers()
+        falseButton.setTitle(answerChoices[0], for: .normal)
+        trueButton.setTitle(answerChoices[1], for: .normal)
+        otherButton.setTitle(answerChoices[2], for: .normal)
+        
+        
         questionLabel.text = quizBrain.getQuestionText()
         progressBar.progress = quizBrain.getProgress()
         scoreLabel.text = "Score: \(quizBrain.getScore())"
@@ -74,10 +85,10 @@ class ViewController: UIViewController {
         falseButton.backgroundColor = UIColor.clear
         otherButton.backgroundColor = UIColor.clear
     
-        //update buttons to hold correct answer
-        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
-        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
-        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
+        //update buttons to hold correct answer - ANT CODE
+//        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
+//        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
+//        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
     }
     
 }

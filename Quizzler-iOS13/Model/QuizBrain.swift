@@ -75,22 +75,29 @@ struct QuizBrain {
         return quiz[questionNumber].text
     }
     
-     func getChoiceOne() -> String {
-        return quiz[questionNumber].choice[0]
+    //Need a way of fetching the answer choices.- ANGELA CODE
+    //returns all array choices
+    func getAnswers() -> [String] {
+        return quiz[questionNumber].choice
     }
     
-     func getChoiceTwo() -> String {
-        return quiz[questionNumber].choice[1]
-    }
-    
-    func getChoiceThree() -> String {
-        return quiz[questionNumber].choice[2]
-    }
-    
+    //ANT CODE GET QUESTIONS
+//     func getChoiceOne() -> String {
+//        return quiz[questionNumber].choice[0]
+//    }
+//
+//     func getChoiceTwo() -> String {
+//        return quiz[questionNumber].choice[1]
+//    }
+//
+//    func getChoiceThree() -> String {
+//        return quiz[questionNumber].choice[2]
+//    }
+//
     
     func getProgress() -> Float {
-        let progress = Float(questionNumber + 1) / Float(quiz.count)
-        return progress       
+        return Float(questionNumber) / Float(quiz.count)
+                
     }
     
     mutating func nextQuestion() { // we have to mutate any function that needs to update a varibale in our struct
