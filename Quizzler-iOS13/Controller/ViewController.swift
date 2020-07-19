@@ -16,17 +16,24 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
+    @IBOutlet weak var otherButton: UIButton!
     @IBOutlet weak var scoreLabel: UILabel!
     
     var quizBrain = QuizBrain() // create a new instance of the QuizBrain Class
     
+// MARK: View did Load
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
         scoreLabel.text = "Score: \(quizBrain.getScore())"
+        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
+        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
+        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
     }
     
+
+// MARK: Button pressed
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         
@@ -43,9 +50,10 @@ class ViewController: UIViewController {
             scoreLabel.text = "Score: \(quizBrain.getScore())"
             sender.backgroundColor = UIColor.red
         }
+
+// MARK: Next Question
         
         quizBrain.nextQuestion()
-        
         
         //Shortcode Timer
         Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) {_ in
@@ -53,18 +61,17 @@ class ViewController: UIViewController {
             
         }
         
-        //Longcode Timer
-        //        Timer.scheduledTimer(timeInterval: 0.2, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
-        
     }
     
-    //need objc in front of func if use long form timer
+// MARK: Update UI
+    
     func updateUI(){
         questionLabel.text = quizBrain.getQuestionText()
         progressBar.progress = quizBrain.getProgress()
         scoreLabel.text = "Score: \(quizBrain.getScore())"
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
+        otherButton.backgroundColor = UIColor.clear
     }
     
 }
