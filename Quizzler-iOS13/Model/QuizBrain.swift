@@ -29,6 +29,7 @@ struct QuizBrain {
     ]
     
     var questionNumber = 0
+    var score = 0
     
     
     //func checkAnswer (answer userAnswer: String)
@@ -47,18 +48,27 @@ struct QuizBrain {
      then we can call it like this
      
      quizBrain.checkAnswer(userAnswer)     */
+
     
     
-    func checkAnswer(_ userAnswer: String) -> Bool {
+    mutating func checkAnswer(_ userAnswer: String) -> Bool {
         
         if userAnswer == quiz[questionNumber].answer {
             //user got it right
+            score += 1
+            print(score)
             return true
-        }
-        else {
+
+        } else {
             //user got it right
+            print(score)
             return false
+
         }
+    }
+    
+     func getScore() -> Int {
+        return score
     }
     
     
@@ -73,7 +83,7 @@ struct QuizBrain {
         return progress       
     }
     
-    mutating func nextQuestion() {
+    mutating func nextQuestion() { // we have to mutate any function that needs to update a varibale in our struct
         if questionNumber + 1 < quiz.count {
             questionNumber += 1
             
@@ -81,6 +91,7 @@ struct QuizBrain {
             
             print("No more Questions!")
             questionNumber = 0
+            score = 0
         }
         
     }

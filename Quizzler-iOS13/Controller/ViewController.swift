@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var progressBar: UIProgressView!
     @IBOutlet weak var trueButton: UIButton!
     @IBOutlet weak var falseButton: UIButton!
-    
+    @IBOutlet weak var scoreLabel: UILabel!
     
     var quizBrain = QuizBrain() // create a new instance of the QuizBrain Class
     
@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        
+        scoreLabel.text = "Score: \(quizBrain.getScore())"
     }
     
     
@@ -37,8 +37,10 @@ class ViewController: UIViewController {
         if userGotItRight { //doesnt require == boolean as it knows it type BOOL
             print("Right!")
             sender.backgroundColor = UIColor.green
-        } else if userGotItRight {
+            scoreLabel.text = "Score: \(quizBrain.getScore())"
+        } else {
             print("Wrong!")
+            scoreLabel.text = "Score: \(quizBrain.getScore())"
             sender.backgroundColor = UIColor.red
         }
         
@@ -51,7 +53,7 @@ class ViewController: UIViewController {
             
         }
         
-        //Shortcode Timer
+        //Longcode Timer
         //        Timer.scheduledTimer(timeInterval: 0.2, target:self, selector: #selector(updateUI), userInfo: nil, repeats: false)
         
     }
@@ -60,10 +62,9 @@ class ViewController: UIViewController {
     func updateUI(){
         questionLabel.text = quizBrain.getQuestionText()
         progressBar.progress = quizBrain.getProgress()
+        scoreLabel.text = "Score: \(quizBrain.getScore())"
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
-        
-        
     }
     
 }
