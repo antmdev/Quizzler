@@ -98,7 +98,6 @@ struct QuizBrain {
             questionNumber += 1
             
         } else {
-            
             print("No more Questions!")
             questionNumber = 0
             score = 0

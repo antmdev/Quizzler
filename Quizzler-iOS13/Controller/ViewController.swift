@@ -30,6 +30,7 @@ class ViewController: UIViewController {
         falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
         trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
         otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
+        progressBar.setProgress( 0.0, animated: true)
     }
     
 
@@ -37,7 +38,7 @@ class ViewController: UIViewController {
     
     @IBAction func answerButtonPressed(_ sender: UIButton) {
         
-        let userAnswer = sender.currentTitle! //True / False
+        let userAnswer = sender.currentTitle! //True / False / Other
         
         let userGotItRight = quizBrain.checkAnswer(userAnswer)
         
@@ -72,6 +73,11 @@ class ViewController: UIViewController {
         trueButton.backgroundColor = UIColor.clear
         falseButton.backgroundColor = UIColor.clear
         otherButton.backgroundColor = UIColor.clear
+    
+        //update buttons to hold correct answer
+        falseButton.setTitle("\(quizBrain.getChoiceOne())", for: UIControl.State.normal)
+        trueButton.setTitle("\(quizBrain.getChoiceTwo())", for: UIControl.State.normal)
+        otherButton.setTitle("\(quizBrain.getChoiceThree())", for: UIControl.State.normal)
     }
     
 }
